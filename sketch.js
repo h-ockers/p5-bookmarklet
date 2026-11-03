@@ -1,17 +1,17 @@
-// Safely initialize popups on the window object so re-injecting won't crash
-if (typeof window.popups === 'undefined') {
-    window.popups = [];
-}
+// Spawn the first popup immediately so you know it works
+spawnPopup();
+
+// Then continue spawning new ones every 5 to 10 seconds
+setInterval(spawnPopup, random(5000, 10000));
 
 function setup() {
+    // Create a transparent canvas that covers the screen without blocking clicks
     let c = createCanvas(windowWidth, windowHeight);
     c.style('position', 'fixed');
     c.style('top', '0');
     c.style('left', '0');
     c.style('z-index', '999998');
     c.style('pointer-events', 'none');
-
-    setInterval(spawnPopup, random(5000, 10000));
 }
 
 function draw() {
